@@ -1,6 +1,5 @@
 # Databricks notebook source
 dbutils.widgets.text("DatabaseName",'')
-dbutils.widgets.text("PAT",'')
 dbutils.widgets.text("DatabricksHost",'xxx.cloud.databricks.com')
 
 
@@ -28,7 +27,7 @@ df.write.mode("overwrite").saveAsTable(f"{dbutils.widgets.get('DatabaseName')}.w
 
 import os, requests, json
 
-token = dbutils.widgets.get('PAT')
+token = dbutils.notebook.entry_point.getDbutils().notebook().getContext().apiToken().get()
 host = dbutils.widgets.get('DatabricksHost')
 root_dir = os.getcwd().replace("/Workspace","")
 
